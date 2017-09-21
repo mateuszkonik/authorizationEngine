@@ -1,5 +1,6 @@
 package com.api.apikeys;
 
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,13 @@ public class ApiKeys {
 
 	@RequestMapping(value = "/apikeys", method = GET)
 	public ResponseEntity getApiKeysAction(
-			@RequestHeader UUID authorization){
+			@RequestHeader @ApiParam(value = "user authentication token", required = true) UUID authorization){
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/apikeys", method = POST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity createApiKeyAction(
-			@RequestHeader UUID authorization,
+			@RequestHeader @ApiParam(value = "user authentication token", required = true) UUID authorization,
 			@RequestBody String body){
 		return new ResponseEntity(HttpStatus.OK);
 	}
@@ -31,7 +32,7 @@ public class ApiKeys {
 	@RequestMapping(value = "/apikeys/delete/{public_key}", method = POST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity deleteApiKeyAction(
 			@PathVariable @ApiParam(value = "api action public key") UUID public_key,
-			@RequestHeader UUID authorization){
+			@RequestHeader @ApiParam(value = "user authentication token", required = true) UUID authorization){
 		return new ResponseEntity(HttpStatus.OK);
 	}
 }

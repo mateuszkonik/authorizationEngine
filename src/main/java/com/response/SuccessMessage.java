@@ -1,6 +1,6 @@
 package com.response;
 
-public enum Confirm {
+public enum SuccessMessage {
 
 	ACCOUNT_EMAIL_CONFIRMED,
 	ACCOUNT_CONFIRMED,
@@ -18,11 +18,11 @@ public enum Confirm {
 
 	public int code;
 
-	Confirm() {
+	SuccessMessage() {
 		code = 200;
 	}
 
-	Confirm(int code) {
+	SuccessMessage(int code) {
 		this.code = code;
 	}
 }
