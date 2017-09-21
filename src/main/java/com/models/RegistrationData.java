@@ -1,7 +1,6 @@
 package com.models;
 
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 
 import java.util.Date;
 import java.util.List;

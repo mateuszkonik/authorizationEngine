@@ -5,7 +5,15 @@ import org.springframework.http.ResponseEntity;
 
 public class StatusResponse {
 
-	public static <T> ResponseEntity success(SuccessMessage successMsg) {
+	public static ResponseEntity success(HttpStatus status) {
+		return new ResponseEntity<>("{}", status);
+	}
+
+	public static <T> ResponseEntity success(HttpStatus status, T body) {
+		return new ResponseEntity<>(body, status);
+	}
+
+	public static ResponseEntity success(SuccessMessage successMsg) {
 		HttpStatus status = HttpStatus.valueOf(successMsg.code);
 
 		return new ResponseEntity<>(status);
