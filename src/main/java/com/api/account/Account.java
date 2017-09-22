@@ -26,12 +26,15 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RestController
 public class Account {
 
+	private GetAccountSettings getAccountSettings = new GetAccountSettings();
+	private Login login = new Login();
+
 	@ApiOperation(value = "getAccountSettings", response = AccountSettingsResponse.class, notes = "This API call returns user account settings")
 	@RequestMapping(value = "/account-settings", method = GET)
 	public ResponseEntity getAccountSettings(
 			@RequestHeader @ApiParam(value = "user authentication token", required = true) UUID authorization,
 			@RequestHeader(required = false) @ApiParam(value = "two factor authorization token") UUID twoFactorAuthToken) {
-		return StatusResponse.success(OK);
+		return getAccountSettings.respond();
 	}
 
 	@ApiOperation(value = "setAccountSettings", response = AccountSettingsResponse.class, notes = "This API call sets user account settings")
@@ -50,7 +53,7 @@ public class Account {
 			@RequestHeader(name="User-Agent", required = false) String userAgent,
 			@RequestHeader(name="remote-ip", required = false) String remoteIP,
 			@RequestBody LoginRequest body) {
-		return StatusResponse.success(OK);
+		return login.respond(authId, userAgent, remoteIP, body);
 	}
 
 	@ApiOperation(value = "logout", response = DefaultResponse.class, notes = "This API call logs the user out and the token obtained by logging in, is deactivated.")
